@@ -1,21 +1,24 @@
-import { uuid } from 'uuidv4';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity('cars')
 class Car {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  carName: string;
-  year: number;
-  description: string;
-  isSold: boolean;
-  createdAt: Date;
 
-  constructor({ carName, year, description, isSold, createdAt }: Omit<Car, 'id'>) {
-    this.id = uuid();
-    this.carName = carName;
-    this.year = year;
-    this.description = description;
-    this.isSold = isSold;
-    this.createdAt = createdAt;
-  }
+  @Column()
+  carName: string;
+
+  @Column('number')
+  year: number;
+
+  @Column()
+  description: string;
+
+  @Column('boolean')
+  isSold: boolean;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
 
 export default Car;
