@@ -1,25 +1,26 @@
-import { request, response, Router } from 'express'
-import Car from '../entities/Car';
+import { Router } from 'express'
+import { getCustomRepository } from 'typeorm';
 import CarRepository from '../repositories/CarRepository';
 
 const carsRouter = Router();
-const carsRepository = new CarRepository();
 
-carsRouter.get('/', (_, response) => {
-  const cars = carsRepository.index();
+carsRouter.get('/', async (_, response) => {
+  const carsRepository = getCustomRepository(CarRepository);
+  const cars = await carsRepository.find();
   return response.json(cars);
 });
 
-carsRouter.get('/find/:id', (request, response) => {
+carsRouter.get('/find/:id', async (request, response) => {
   const carId = request.params.id;
-  const car = carsRepository.findCarById(carId);
+  const carsRepository = getCustomRepository(CarRepository);
+  const car = await carsRepository.findCarById(carId);
   if (car)
     return response.json(car);
   else
     return response.json({ "message": "Car not found!" });
 });
 
-carsRouter.post('/', (request, response) => {
+carsRouter.post('/', async (request, response) => {
   const {
     carName,
     year,
@@ -27,9 +28,9 @@ carsRouter.post('/', (request, response) => {
     isSold,
     createdAt,
   } = request.body;
-
+  const carsRepository = getCustomRepository(CarRepository);
   const car = carsRepository.create({ carName, year, description, isSold, createdAt });
-
+  await carsRepository.save(car);
   return response.json(car);
 });
 

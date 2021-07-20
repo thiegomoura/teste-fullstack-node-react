@@ -8,7 +8,7 @@ class Car {
   @Column()
   carName: string;
 
-  @Column('number')
+  @Column('int')
   year: number;
 
   @Column()

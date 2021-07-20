@@ -7,7 +7,9 @@
     "build": "tsc",
     "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "start": "ts-node src/index.ts",
-    "typerom": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typerom": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "typeorm-test": "TS_NODE_PROJECT=tsconfig.ts-node.json TS_NODE_TRANSPILE_ONLY=true ts-node ./node_modules/typeorm/cli.js"
+
   },
   "dependencies": {
     "date-fns": "^2.22.1",
