@@ -1,11 +1,24 @@
 {
-    "type": "mongodb",
-    "url": "mongodb+srv://thiego:passwordhardcore@storage.zr8pm.mongodb.net/dev?retryWrites=true&w=majority",
-    "entities": ["./src/entities/*.*"],
-    "migrations": [
-        "./src/database/migrations/*.trs"
-    ],
-    "cli": {
-        "migrationsDir": "./src/database/migrations"
-    }
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "123321",
+  "database": "cars",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+     "src/entities/**/*.ts"
+  ],
+  "migrations": [
+     "src/database/migration/**/*.ts"
+  ],
+  "subscribers": [
+     "src/subscriber/**/*.ts"
+  ], 
+  "cli": {
+     "entitiesDir": "src/entities",
+     "migrationsDir": "src/database/migration",
+     "subscribersDir": "src/subscriber"
+  }
 }

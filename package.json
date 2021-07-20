@@ -12,7 +12,7 @@
   "dependencies": {
     "date-fns": "^2.22.1",
     "express": "^4.17.1",
-    "mongodb": "^4.0.0",
+    "mysql": "npm:mysql2@^2.1.0",
     "typeorm": "^0.2.34",
     "uuidv4": "^6.2.11"
   },

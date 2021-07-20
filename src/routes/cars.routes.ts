@@ -1,29 +1,22 @@
 import { request, response, Router } from 'express'
-import { uuid } from 'uuidv4';
-import { parseISO, startOfYear, } from 'date-fns';
+import Car from '../entities/Car';
+import CarRepository from '../repositories/CarRepository';
 
 const carsRouter = Router();
+const carsRepository = new CarRepository();
 
-
-interface Car {
-  id: string;
-  carName: string;
-  year: Date;
-  description: string;
-  isSold: boolean;
-  createdAt: Date;
-}
-
-const cars: Car[] = [];
-
-carsRouter.get('/', (request, response) => {
+carsRouter.get('/', (_, response) => {
+  const cars = carsRepository.index();
   return response.json(cars);
 });
 
 carsRouter.get('/find/:id', (request, response) => {
   const carId = request.params.id;
-  const car = cars.filter(item => item.id === carId)
-  return response.json(car);
+  const car = carsRepository.findCarById(carId);
+  if (car)
+    return response.json(car);
+  else
+    return response.json({ "message": "Car not found!" });
 });
 
 carsRouter.post('/', (request, response) => {
@@ -35,16 +28,7 @@ carsRouter.post('/', (request, response) => {
     createdAt,
   } = request.body;
 
-  const car = {
-    id: uuid(),
-    carName,
-    year,
-    description,
-    isSold,
-    createdAt: parseISO(createdAt),
-  }
-
-  cars.push(car);
+  const car = carsRepository.create({ carName, year, description, isSold, createdAt });
 
   return response.json(car);
 });
