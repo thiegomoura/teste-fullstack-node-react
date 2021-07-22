@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IconContext } from "react-icons";
 import { FiPlusCircle } from 'react-icons/fi';
 import { BsTagFill } from "react-icons/bs";
@@ -12,6 +12,12 @@ import {
 } from './styles';
 
 const Home: React.FC = () => {
+  const [showModal, setshowModal] = useState(true);
+
+  const openModal = () => {
+    setshowModal(modal => !modal)
+  }
+  
   return (
     <div>
       <Header>
@@ -72,7 +78,7 @@ const Home: React.FC = () => {
           </div>
           <hr />
           <div className="footer">
-            <button type="button">
+            <button type="button" onClick={openModal}>
               <HiPencil size={24} />
               <span>Editar</span>
             </button>
