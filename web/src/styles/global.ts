@@ -13,11 +13,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, textarea, label {
     font: 16px Roboto, sans-serif;
   }
 
   #root {
+    position: relative;
+  }
+
+  .container {
     max-width: 960px;
     margin: 0 auto;
     padding: 8px 20px;

@@ -9,7 +9,7 @@ import {
 
 const Header: React.FC = () => {
   return (
-    <Main>
+    <Main className='container'>
       <FaCar size={48} />
       <h1>Carangão</h1>
       <Form>

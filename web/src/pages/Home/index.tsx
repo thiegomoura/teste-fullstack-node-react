@@ -13,7 +13,7 @@ import {
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className='container'>
       <Header>
         <span>Cadastro de veículos</span>
         <a href="#">
