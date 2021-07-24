@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { FormEvent, useCallback, useEffect, useState } from 'react'
 import { IconContext } from "react-icons";
 import { FiPlusCircle } from 'react-icons/fi';
 import { BsTagFill } from "react-icons/bs";
 import { HiPencil } from 'react-icons/hi';
+import { AiOutlineSearch } from 'react-icons/ai'
+
+import api from '../../services/api';
 
 import {
   Container,
@@ -11,7 +14,37 @@ import {
   Info
 } from './styles';
 
+interface Car {
+  id: string;
+  carName: string;
+  year: number;
+  description: string;
+  isSold: boolean;
+  createdAt: string;
+}
+
 const Home: React.FC = () => {
+  const [cars, setCars] = useState<Car[]>([]);
+  const [carDetail, setCarDetail] = useState<Car | null>(null);
+
+  useEffect(() => {
+    const getCars = async () => {
+      const response = await api.get<Car[]>('/cars');
+      const car = response.data;
+      setCars(car);
+    }
+    getCars();
+  }, [])
+
+  function handleAddCarDetail(id: string) {
+    const carSelect = cars.filter(car => car.id === id);
+    setCarDetail(carSelect[0]);
+  }
+
+  // async function handleAddCar(event: FormEvent<HTMLFormElement>): Promise<void> {
+  //   event.preventDefault
+  // }
+
   return (
     <div className='container'>
       <Header>
@@ -24,64 +57,56 @@ const Home: React.FC = () => {
       <Container>
         <Cars>
           <span>Lista de veículos</span>
-          <a href="#">
-            <div>
-              <strong>FIAT</strong>
-              <span>Pali G5 SP. 1.6 Flex</span>
-              <span>2016</span>
-            </div>
-            <BsTagFill size={24} />
-          </a>
-          <a href="#">
-            <div>
-              <strong>FIAT</strong>
-              <span>Pali G5 SP. 1.6 Flex</span>
-              <span>2016</span>
-            </div>
-            <BsTagFill size={24} />
-          </a>
-          <a href="#">
-            <div>
-              <strong>FIAT</strong>
-              <span>Pali G5 SP. 1.6 Flex</span>
-              <span>2016</span>
-            </div>
-            <BsTagFill size={24} />
-          </a>
+          {cars.map((car) => {
+            return (
+              <a onClick={() => { handleAddCarDetail(car.id) }} key={car.id}>
+                <div>
+                  <strong>{car.carName}</strong>
+                  <span>{car.description}</span>
+                  <span>{car.year}</span>
+                </div>
+                <BsTagFill size={24} />
+              </a>
+            )
+          })}
         </Cars>
         <Info>
           <span>Detalhes</span>
-          <div>
-            <strong>Palio G5 SP.1.6 Flex</strong>
-            <div>
+          {carDetail ? (
+            <>
               <div>
-                <strong>Marca</strong>
-                <span>FIAT</span>
+                <strong>{carDetail.carName}</strong>
+                <div>
+                  <div>
+                    <strong>Marca</strong>
+                    <span>FIAT</span>
+                  </div>
+                  <div>
+                    <strong>Ano</strong>
+                    <span>{carDetail.year}</span>
+                  </div>
+                </div>
+                <p>{carDetail.description}</p>
               </div>
-              <div>
-                <strong>Ano</strong>
-                <span>2016</span>
+              <hr />
+              <div className="footer">
+                <button type="button">
+                  <HiPencil size={24} />
+                  <span>Editar</span>
+                </button>
+                <IconContext.Provider value={{ color: "green" }}>
+                  <div>
+                    <BsTagFill size={36} className="sold" />
+                  </div>
+                </IconContext.Provider>
               </div>
+            </>
+          ) : (
+            <div className="select-car">
+              <strong>Selecione um carro para visualizar</strong>
+              <AiOutlineSearch size={48} />
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam porro fugiat nulla soluta repellendus possimus eligendi, laboriosam provident aliquam voluptates. Ea autem, mollitia dolore accusantium nostrum quis! Explicabo, magnam odit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur sint non ad. Perspiciatis repudiandae laborum, magnam recusandae iure ipsa tenetur dolorem non sint excepturi dolor repellat in architecto placeat ratione.
-            </p>
-            <p>Laboriosam exercitationem neque ut libero numquam ratione maxime fugit atque, corporis autem id repellendus, rerum explicabo, deserunt ducimus velit! Nesciunt alias laboriosam earum consequuntur, voluptates sapiente neque incidunt aspernatur iure?
-              Aspernatur porro enim delectus cum necessitatibus quia similique.
-            </p>
-          </div>
-          <hr />
-          <div className="footer">
-            <button type="button">
-              <HiPencil size={24} />
-              <span>Editar</span>
-            </button>
-            <IconContext.Provider value={{ color: "green" }}>
-              <div>
-                <BsTagFill size={36} className="sold" />
-              </div>
-            </IconContext.Provider>
-          </div>
+          )}
         </Info>
       </Container >
     </div >

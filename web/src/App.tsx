@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Home />
       <GlobalStyle />
-      <Modal />
+      {/* <Modal />; */}
     </>
   );
 }

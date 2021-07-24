@@ -122,7 +122,10 @@ margin-left: 16px;
         margin-right: 145px;
       }
     }
+    
   }
+
+  
 
   div.footer {
     flex-direction: row;
