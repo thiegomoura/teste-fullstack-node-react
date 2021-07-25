@@ -1,4 +1,5 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useCar } from '../../contexts/CarContext';
 import { IconContext } from "react-icons";
 import { FiPlusCircle } from 'react-icons/fi';
 import { BsTagFill } from "react-icons/bs";
@@ -17,6 +18,7 @@ import {
 interface Car {
   id: string;
   carName: string;
+  brand: string;
   year: number;
   description: string;
   isSold: boolean;
@@ -24,32 +26,27 @@ interface Car {
 }
 
 const Home: React.FC = () => {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [carDetail, setCarDetail] = useState<Car | null>(null);
-
+  const { cars, setCars, carsFiltered, setCarsFiltered, carDetail, setCarDetail, isAddingCar, setIsAddingCar } = useCar();
   useEffect(() => {
     const getCars = async () => {
       const response = await api.get<Car[]>('/cars');
       const car = response.data;
       setCars(car);
+      setCarsFiltered(car);
     }
     getCars();
-  }, [])
+  }, [isAddingCar])
 
   function handleAddCarDetail(id: string) {
     const carSelect = cars.filter(car => car.id === id);
     setCarDetail(carSelect[0]);
   }
 
-  // async function handleAddCar(event: FormEvent<HTMLFormElement>): Promise<void> {
-  //   event.preventDefault
-  // }
-
   return (
     <div className='container'>
       <Header>
         <span>Cadastro de veículos</span>
-        <a href="#">
+        <a href="#" onClick={() => setIsAddingCar(true)}>
           <FiPlusCircle size={36} />
         </a>
       </Header>
@@ -57,12 +54,11 @@ const Home: React.FC = () => {
       <Container>
         <Cars>
           <span>Lista de veículos</span>
-          {cars.map((car) => {
+          {carsFiltered.map((car) => {
             return (
               <a onClick={() => { handleAddCarDetail(car.id) }} key={car.id}>
                 <div>
                   <strong>{car.carName}</strong>
-                  <span>{car.description}</span>
                   <span>{car.year}</span>
                 </div>
                 <BsTagFill size={24} />
@@ -79,7 +75,7 @@ const Home: React.FC = () => {
                 <div>
                   <div>
                     <strong>Marca</strong>
-                    <span>FIAT</span>
+                    <span>{carDetail.brand}</span>
                   </div>
                   <div>
                     <strong>Ano</strong>
