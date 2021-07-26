@@ -22,7 +22,6 @@ interface CarContextProps {
     setIsAddingCar(arg0: boolean): void;
 }
 
-// export const CarContext = React.createContext<CarContextProps | null>(null) as React.Context<CarContextProps>;
 
 const CarContext = createContext<CarContextProps>({} as CarContextProps);
 

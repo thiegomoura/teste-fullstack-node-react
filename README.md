@@ -1,32 +1,25 @@
-# Teste Desenvolvedor Fullstack
-
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="GITHUB/logo.png" alt="Logo" height="80">
-  </a>
-
-  <h3 align="center">Carangão</h3>
-
+<h1>Teste Desenvolvedor Fullstack</h1>
   <p align="center">
-    API para cadastro e listagem de informações básicas de veículos e consumo via browser.
+    API JSON RESTful para cadastro e listagem de informações básicas de veículos e consumo via UI conforme layout.
     <br />
-    <br />
-    <br />
-    <a href="https://https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/web">Código do Frontend</a>
+    <a href="https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/web">Código do Frontend</a>
     ·
-    <a href="https://https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/server">Código do Servidor</a>
+    <a href="https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/server">Código do Servidor</a>
+    ·
+    <a href="https://github.com/thiegomoura/teste-fullstack-node-react/blob/master/REQUISITOS.md">Requisitos</a>
   </p>
 </p>
 
 ## Sobre o projeto
 
-Projeto desenvolvido como teste para a vaga de Desenvolvedor Fullstack na 4Events.
+*<a href="">Descrição do teste e requesitos</a>*
 
-<a href="https://github.com/thiegomoura/teste-fullstack-node-react/blob/master/web/REQUISITOS.md">Descrição do teste e requesitos</a>
-
-<p align="center">
+<!-- <p align="center">
     <img src="GITHUB/screenshot.png" alt="Screenshow" width="600">
-</p>
+</p> -->
+
+![Screenshot da aplicação!](/GITHUB/screenshot.gif "Screenshot")
 
 ### Desenvolvido com
 
@@ -36,49 +29,67 @@ Projeto desenvolvido como teste para a vaga de Desenvolvedor Fullstack na 4Event
 
 ## Primeiros passos
 
-Primeiramente instale as depedencias tanto para o server quanto o cliente:
+Instale as dependências do cliente e servidorinstale as depedencias tanto para o server quanto o cliente:
 
 ## Configurando o servidor/backend
 
 ```bash
-cd server
-npm update
-# or
-yarn
+# navegue para a pasta do servidor
+$ cd server
+# atualize as depencias utilizando yarn ou outro gerenciador de pacotes
+$ yarn
 ```
 
-Preencha as informações do banco de dados utilizado, no arquivo `ormconfig.json` na pasta raiz do servidor.
+Edite as informações abaixo no arquivo `ormconfig.json`, que se encontra na pasta raiz do servidor, preenchendo as informações de necessárias para que o TypeORM realize a conexão com o banco de dados.
+
+```json
+{
+  "type": "mysql", // banco de dados utilizado
+  "host": "localhost", // endereço do banco de dados
+  "port": 3306, // porta do banco de dados
+  "username": "root", // usuário do banco de dados
+  "password": "123321", // senha do banco de dados
+  "database": "test-fullstack" // banco de dados *necessário criar manulmente*
+}
+```
+
+Acesse a [documentação](https://typeorm.io/#/connection-options) documentação para consultar outras possibilidades de configurações e banco de dados suportados pelo TypeORM.
+
 
 ### Create database
 
-- Crie o banco de dados configurado no `ormconfig.json`
+*Crie o banco de dados configurado no `ormconfig.json`*
 
 Rode as migrations para criar as estruturas de tabelas no banco de dados
 
 ```bash
-# run migrations
+# rodar migrations
 $ yarn typeorm migration:run
 ```
+
+Caso o comando retorne algum erro vefique as configurações inseridas no arquivo `ormconfig.json`.
+
 ### Iniciar servidor
-Rode o script abaixo
 ```bash
+# iniciar servidor
 $ yarn dev:server
 ```
 
-- Com o servidor rodando, em outro console inicie a configuração do cliente
+Com o servidor rodando, **em outro console/terminal** inicie a configuração do cliente.
 
 ## Configurando o cliente/frontend
 
 ```bash
-cd web
-npm update
-# or
-yarn
+# certifique-se de estar na pasta raiz da aplicação e então navegue para a pasta do cliente
+$ cd web
+# atualize as depencias utilizando yarn ou outro gerenciador de pacotes
+$ yarn
 ```
 
 ### Iniciar cliente
-Rode o script abaixo
+
 ```bash
+# iniciar servidor
 $ yarn start
 ```
 
@@ -86,9 +97,9 @@ $ yarn start
 
 | Método | Rota | Função | Campos obrigatórios | Descrição |
 |--|--|--|--|--|
-| POST | /car | Cadastra um carro | carName, brand, year, isSold e createdAt | Cadastra as informações de um veiculo na base de dados |
-| GET | /car | Listar veículos |  | Retorna as informações do veículos cadastrados na API |
-| GET | /car/:id | Listar veículo | id | Retorna a informações de um veículo específico cadastrado na API |
+| POST | /cars | Cadastra um carro | carName, brand, year, isSold e createdAt | Cadastra as informações de um veiculo na base de dados |
+| GET | /cars | Listar veículos |  | Retorna as informações do veículos cadastrados na API |
+| GET | /cars/:id | Listar veículo | id | Retorna a informações de um veículo específico cadastrado na API |
 ---
 
 Made with ☕ and 🤯 by [Thiego Moura](https://thiegomoura.github.io/me/)

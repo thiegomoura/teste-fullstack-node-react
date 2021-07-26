@@ -46,7 +46,7 @@ const Modal = () => {
         track: {},
     })(Switch);
 
-    function handleSaveCar(event: FormEvent<HTMLFormElement>) {
+    async function handleSaveCar(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const newCar = {
             carName,
@@ -56,8 +56,13 @@ const Modal = () => {
             isSold
         }
         try {
-            api.post('/cars', newCar);
+            await api.post('/cars', newCar);
             setIsAddingCar(false);
+            setCarName('');
+            setBrand('');
+            setYear('');
+            setIsSold(false);
+            setDescription('');
         } catch (error) {
             console.log(error)
         }
