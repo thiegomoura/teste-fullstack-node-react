@@ -23,13 +23,14 @@ carsRouter.get('/find/:id', async (request, response) => {
 carsRouter.post('/', async (request, response) => {
   const {
     carName,
+    brand,
     year,
     description,
     isSold,
     createdAt,
   } = request.body;
   const carsRepository = getCustomRepository(CarRepository);
-  const car = carsRepository.create({ carName, year, description, isSold, createdAt });
+  const car = carsRepository.create({ carName, brand, year, description, isSold, createdAt });
   await carsRepository.save(car);
   return response.json(car);
 });

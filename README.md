@@ -1,72 +1,94 @@
-# Teste fullstack
+# Teste Desenvolvedor Fullstack
 
-Leia primeiro todo o projeto, faça sua estimativa de horas para o desenvolvimento e envie um email com o título `[Teste Fullstack] Estimativa` para rh@4.events
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="GITHUB/logo.png" alt="Logo" height="80">
+  </a>
 
-Forke este projeto, faça o desenvolvimento e quando finalizar faça um PR aqui. Envie um email com o título `[Teste Fullstack] Finalizado` para rh@4.events com o link do seu PR.
+  <h3 align="center">Carangão</h3>
 
-Se você não sabe o que é fazer um "Forke" ou um "PR", pesquise. Valorizamos muito a proatividade.
+  <p align="center">
+    API para cadastro e listagem de informações básicas de veículos e consumo via browser.
+    <br />
+    <br />
+    <br />
+    <a href="https://https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/web">Código do Frontend</a>
+    ·
+    <a href="https://https://github.com/thiegomoura/teste-fullstack-node-react/tree/master/server">Código do Servidor</a>
+  </p>
+</p>
 
-**Lembre-se: atualize este README informando como instalar e executar seu projeto.**
+## Sobre o projeto
 
-## Missão backend
+Projeto desenvolvido como teste para a vaga de Desenvolvedor Fullstack na 4Events.
 
-Desenvolver uma **API JSON RESTful** em **Node**, que utilize os métodos `GET` e `POST`.
+<a href="https://github.com/thiegomoura/teste-fullstack-node-react/blob/master/web/REQUISITOS.md">Descrição do teste e requesitos</a>
 
-Faça o teste unitário da **API** (Bônus :star:)
-### Especificação
+<p align="center">
+    <img src="GITHUB/screenshot.png" alt="Screenshow" width="600">
+</p>
 
-Monte uma base de veículo com a seguinte estrutura:
+### Desenvolvido com
 
+* [NodeJS](https://nodejs.org)
+* [ReactJS](https://reactjs.org)
+* [TypeORM](https://typeorm.io/#/)
+
+## Primeiros passos
+
+Primeiramente instale as depedencias tanto para o server quanto o cliente:
+
+## Configurando o servidor/backend
+
+```bash
+cd server
+npm update
+# or
+yarn
 ```
-veiculo:   string
-ano:       integer
-descricao: text
-vendido:   bool
-created:   datetime
+
+Preencha as informações do banco de dados utilizado, no arquivo `ormconfig.json` na pasta raiz do servidor.
+
+### Create database
+
+- Crie o banco de dados configurado no `ormconfig.json`
+
+Rode as migrations para criar as estruturas de tabelas no banco de dados
+
+```bash
+# run migrations
+$ yarn typeorm migration:run
+```
+### Iniciar servidor
+Rode o script abaixo
+```bash
+$ yarn dev:server
 ```
 
-Utilize **MongoDB** ou **MySQL** para armazenar os dados que a **API** irá consumir.
+- Com o servidor rodando, em outro console inicie a configuração do cliente
 
-### API endpoints
+## Configurando o cliente/frontend
 
-`GET /veiculos`
+```bash
+cd web
+npm update
+# or
+yarn
+```
 
-Retorna todos os veículos
+### Iniciar cliente
+Rode o script abaixo
+```bash
+$ yarn start
+```
 
+### Rotas da API
+
+| Método | Rota | Função | Campos obrigatórios | Descrição |
+|--|--|--|--|--|
+| POST | /car | Cadastra um carro | carName, brand, year, isSold e createdAt | Cadastra as informações de um veiculo na base de dados |
+| GET | /car | Listar veículos |  | Retorna as informações do veículos cadastrados na API |
+| GET | /car/:id | Listar veículo | id | Retorna a informações de um veículo específico cadastrado na API |
 ---
 
-`GET /veiculos/find`
-
-Retorna os veículos de acordo com o termo passado parâmetro `q`
-
----
-
-`POST /veiculos`
-
-Adiciona um novo veículo
-
-
-## Missão frontend
-
-Desenvolver uma **UI (User Interface)** de acordo com o desenho que está na pasta [layout]
-
-### Especificação
-
-- Cross browser support (IE11+)
-- Consumir **API** criada acima
-- Criar uma tela que tenha...
-    - Listagem de veículos
-    - Busca
-    - Formulário de novo veículo
-
-### Dica
-
-Utilize algum framework para auxiliar no desenvolvimento da interface, por exemplo:
-
-- https://getmdl.io/
-- http://getbootstrap.com/css/
-- http://foundation.zurb.com/
-
-## Dúvida
-
-Se tiver qualquer dúvida sobre esse teste, envie um email com o título `[Teste Fullstack] O assunto que vc deseja` para rh@4.events
+Made with ☕ and 🤯 by [Thiego Moura](https://thiegomoura.github.io/me/)

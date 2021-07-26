@@ -80,6 +80,7 @@ export const Cars = styled.div`
 export const Info = styled.div`
 margin-top: 20px;
 margin-left: 16px;
+
   > span {
       color: #3a3a3f;
       font-size: 16px;
@@ -122,6 +123,7 @@ margin-left: 16px;
         margin-right: 145px;
       }
     }
+    
   }
 
   div.footer {
@@ -153,6 +155,13 @@ margin-left: 16px;
     }
     
   }
+  }
+
+  .select-car {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 500px;
   }
 `;
 

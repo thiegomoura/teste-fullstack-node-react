@@ -8,6 +8,9 @@ class Car {
   @Column()
   carName: string;
 
+  @Column()
+  brand: string;
+
   @Column('int')
   year: number;
 
